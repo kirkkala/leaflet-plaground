@@ -30,7 +30,7 @@ interface Location {
 }
 
 export default function Home() {
-  const icon = useMapIcon();
+  const icons = useMapIcon();
   const [isClient, setIsClient] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
@@ -390,6 +390,10 @@ export default function Home() {
     return matchesSearch && matchesCategory;
   });
 
+  const handleLocationClick = (location: Location) => {
+    setActiveLocation(location);
+  };
+
   return (
     <div className="min-h-screen flex flex-col">
       {/* Search and Filter Bar */}
@@ -426,10 +430,9 @@ export default function Home() {
                 className={`p-3 rounded cursor-pointer hover:bg-gray-100 mb-2 ${
                   activeLocation?.name === location.name ? 'bg-blue-50' : ''
                 }`}
-                onClick={() => setActiveLocation(location)}
+                onClick={() => handleLocationClick(location)}
               >
                 <h3 className="font-bold">{location.name}</h3>
-                <p className="text-sm text-gray-600">{location.message}</p>
               </div>
             ))}
           </div>
@@ -437,16 +440,11 @@ export default function Home() {
 
         {/* Map */}
         <div className="flex-1">
-          <style jsx global>{`
-            @import 'leaflet/dist/leaflet.css';
-          `}</style>
-
-          {isClient && icon ? (
+          {isClient && icons.default && icons.highlighted ? (
             <MapContainer
               center={activeLocation?.position || [60.1699, 24.9384]}
-              zoom={12}
+              zoom={activeLocation ? 14 : 12}
               style={{ height: 'calc(100vh - 64px)', width: '100%' }}
-              zoomControl={false}
             >
               <TileLayer
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -456,9 +454,11 @@ export default function Home() {
                 <Marker
                   key={location.name}
                   position={location.position}
-                  icon={icon}
+                  icon={icons.default && icons.highlighted ?
+                    (location.name === activeLocation?.name ? icons.highlighted : icons.default)
+                    : undefined}
                   eventHandlers={{
-                    click: () => setActiveLocation(location)
+                    click: () => handleLocationClick(location)
                   }}
                 >
                   <Popup>

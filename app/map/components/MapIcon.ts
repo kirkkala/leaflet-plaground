@@ -3,13 +3,15 @@
 import { useEffect, useState } from 'react';
 import type { Icon } from 'leaflet';
 
-export function useMapIcon(): Icon | null {
-  const [icon, setIcon] = useState<Icon | null>(null);
+export function useMapIcon() {
+  const [icons, setIcons] = useState<{
+    default: Icon | null;
+    highlighted: Icon | null;
+  }>({ default: null, highlighted: null });
 
   useEffect(() => {
-    // Only import and create the icon on the client side
     import('leaflet').then((L) => {
-      const MapIcon = L.default.Icon.extend({
+      const DefaultIcon = L.default.Icon.extend({
         options: {
           iconUrl: '/marker.svg',
           iconRetinaUrl: '/marker.svg',
@@ -18,9 +20,23 @@ export function useMapIcon(): Icon | null {
           popupAnchor: [1, -34],
         }
       });
-      setIcon(new MapIcon());
+
+      const HighlightedIcon = L.default.Icon.extend({
+        options: {
+          iconUrl: '/marker-highlighted.svg',
+          iconRetinaUrl: '/marker-highlighted.svg',
+          iconSize: [30, 49], // Slightly larger
+          iconAnchor: [15, 49],
+          popupAnchor: [1, -40],
+        }
+      });
+
+      setIcons({
+        default: new DefaultIcon(),
+        highlighted: new HighlightedIcon()
+      });
     });
   }, []);
 
-  return icon;
+  return icons;
 }
