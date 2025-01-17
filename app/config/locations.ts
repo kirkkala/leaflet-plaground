@@ -13,7 +13,8 @@ export type LocationCategory =
   | 'culture'
   | 'sports'
   | 'theatre'
-  | 'indoor';
+  | 'indoor'
+  | 'basketball';
 
 export const categories: Record<LocationCategory, { label: string; emoji: string }> = {
   all: { label: 'Kaikki', emoji: '🗺️' },
@@ -22,7 +23,8 @@ export const categories: Record<LocationCategory, { label: string; emoji: string
   culture: { label: 'Kulttuuri ja museot', emoji: '🎨' },
   sports: { label: 'Urheilu ja liikunta', emoji: '🎾' },
   theatre: { label: 'Teatteri ja sirkus', emoji: '🎭' },
-  indoor: { label: 'Sisäaktiviteetit', emoji: '🏛️' }
+  indoor: { label: 'Sisäaktiviteetit', emoji: '🏛️' },
+  basketball: { label: 'Koripallokentät', emoji: '🏀' }
 };
 
 export const locations: Location[] = [
@@ -410,5 +412,124 @@ export const locations: Location[] = [
     position: [60.1754, 24.8366],
     message: 'Espoon Tapiolassa sijaitseva lastenteatteri, joka tunnetaan aadukkaista nukketeatteriesityksistään.',
     category: 'theatre'
+  },
+  {
+    id: 'brahenkentta',
+    name: 'Brahenkentän koripallokenttä',
+    position: [60.1873, 24.9516],
+    message: 'Suosittu ulkokenttä Kalliossa. Kentällä on hyvä asfalttipinta ja useita koreja.',
+    category: 'basketball'
+  },
+  {
+    id: 'toolo-basketball',
+    name: 'Töölön pallokenttä',
+    position: [60.1837, 24.9214],
+    message: 'Monipuolinen urheilualue, jossa kaksi täysikokoista ulkokoripallokenttää.',
+    category: 'basketball'
+  },
+  {
+    id: 'kamppi-basketball',
+    name: 'Kampin liikuntakeskus',
+    position: [60.1686, 24.9322],
+    message: 'Sisäkoripallokenttä, jossa voi pelata ympäri vuoden. Varattavissa myös yksityiskäyttöön.',
+    category: 'basketball'
+  },
+  {
+    id: 'jaahalli-basketball',
+    name: 'Nordenskiöldinkadun kenttä',
+    position: [60.1889, 24.9272],
+    message: 'Jäähallin vieressä sijaitseva ulkokenttä, jossa useita koreja ja hyvä valaistus.',
+    category: 'basketball'
+  },
+  {
+    id: 'pirkkola-basketball',
+    name: 'Pirkkolan liikuntapuisto',
+    position: [60.2343, 24.9214],
+    message: 'Sekä sisä- että ulkokenttiä. Sisähallissa täysimittainen pelikenttä katsomoineen.',
+    category: 'basketball'
+  },
+  {
+    id: 'kontula-basketball',
+    name: 'Kontulan liikuntapuisto',
+    position: [60.2367, 25.0824],
+    message: 'Uudistettu ulkokenttä ja sisäpelimahdollisuus liikuntahallissa.',
+    category: 'basketball'
+  },
+  {
+    id: 'myllypuro-basketball',
+    name: 'Myllypuron Pallomylly',
+    position: [60.2238, 25.0777],
+    message: 'Metropolian kampuksen yhteydessä oleva moderni sisäkoripallokenttä.',
+    category: 'basketball'
+  },
+  {
+    id: 'herttoniemi-basketball',
+    name: 'Herttoniemen liikuntapuisto',
+    position: [60.1919, 25.0431],
+    message: 'Kunnostettu ulkokenttä ja koripalloteline. Hyvät pukuhuonetilat.',
+    category: 'basketball'
+  },
+  {
+    id: 'namika-areena',
+    name: 'Namika Areena',
+    position: [60.2343, 24.9214],
+    message: 'Pakilan koripallohalli, jossa toimii Namika Helsinki. Täysimittainen kenttä ja hyvät harjoitustilat.',
+    category: 'basketball'
+  },
+  {
+    id: 'kisahalli-basketball',
+    name: 'Kisahalli',
+    position: [60.1736, 24.9277],
+    message: 'Historiallinen urheiluhalli Töölössä. Useita koripallokenttiä ja aktiivista seuratoimintaa.',
+    category: 'basketball'
+  },
+  {
+    id: 'malmi-basketball',
+    name: 'Malmin Palloiluhalli',
+    position: [60.2508, 25.0075],
+    message: 'Monipuolinen sisäliikuntahalli, jossa useita koripallokenttiä. Aktiivista junioritoimintaa.',
+    category: 'basketball'
+  },
+  {
+    id: 'munkkiniemi-basketball',
+    name: 'Munkkiniemen yhteiskoulu',
+    position: [60.1989, 24.8775],
+    message: 'Koulun liikuntasali, jossa toimii aktiivinen koripalloseura MuKi. Hyvät harjoitusolosuhteet.',
+    category: 'basketball'
+  },
+  {
+    id: 'tapiolan-urheiluhalli',
+    name: 'Tapiolan Urheiluhalli',
+    position: [60.1754, 24.8066],
+    message: 'Espoon suurin koripallohalli. Täysimittainen kenttä ja katsomo. Hongan kotihalli.',
+    category: 'basketball'
+  },
+  {
+    id: 'toppelund-basketball',
+    name: 'Toppelundin kenttä',
+    position: [60.1608, 24.7785],
+    message: 'Haukilahdessa sijaitseva ulkokenttä, jossa kaksi koria ja hyvä asfalttipinta.',
+    category: 'basketball'
+  },
+  {
+    id: 'ymca-basketball',
+    name: 'YMCA Areena',
+    position: [60.1686, 24.9225],
+    message: 'Helsingin NMKY:n kotihalli. Laadukas sisähalli jossa järjestetään paljon junioriotteluita.',
+    category: 'basketball'
+  },
+  {
+    id: 'vuosaari-basketball',
+    name: 'Vuosaaren urheilutalo',
+    position: [60.2067, 25.1442],
+    message: 'Moderni liikuntakeskus, jossa täysimittainen koripallokenttä ja hyvät harjoitustilat.',
+    category: 'basketball'
+  },
+  {
+    id: 'hnmky-areena',
+    name: 'Namika Areena',
+    position: [60.2420654, 24.9285945],
+    message: 'Namika Areena on Helsingin NMKY:n urheiluhalli. Areena palvee monipuolista lasten ja nuorten toimintaa sekä Pakilan peruskoulun liikunnanopetusta.',
+    category: 'basketball'
   }
 ];
