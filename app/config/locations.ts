@@ -14,7 +14,8 @@ export type LocationCategory =
   | 'sports'
   | 'theatre'
   | 'indoor'
-  | 'basketball';
+  | 'basketball'
+  | 'candy';
 
 export const categories: Record<LocationCategory, { label: string; emoji: string }> = {
   all: { label: 'Kaikki', emoji: '🗺️' },
@@ -24,7 +25,8 @@ export const categories: Record<LocationCategory, { label: string; emoji: string
   sports: { label: 'Urheilu ja liikunta', emoji: '🎾' },
   theatre: { label: 'Teatteri ja sirkus', emoji: '🎭' },
   indoor: { label: 'Sisäaktiviteetit', emoji: '🏛️' },
-  basketball: { label: 'Koripallokentät', emoji: '🏀' }
+  basketball: { label: 'Koripallokentät', emoji: '🏀' },
+  candy: { label: 'Karkkikaupat', emoji: '🍬' }
 };
 
 export const locations: Location[] = [
@@ -531,5 +533,61 @@ export const locations: Location[] = [
     position: [60.2420654, 24.9285945],
     message: 'Namika Areena on Helsingin NMKY:n urheiluhalli. Areena palvee monipuolista lasten ja nuorten toimintaa sekä Pakilan peruskoulun liikunnanopetusta.',
     category: 'basketball'
+  },
+  {
+    id: 'karkkikauppa-sweetheart',
+    name: 'Sweetheart',
+    position: [60.1686, 24.9384],
+    message: 'Kampin keskuksessa sijaitseva karkkikauppa, jossa laaja valikoima irtokarkkeja ja amerikkalaisia herkkuja.',
+    category: 'candy'
+  },
+  {
+    id: 'karkkikauppa-candy-store',
+    name: 'The Candy Store',
+    position: [60.1662, 24.9479],
+    message: 'Iso-Roobertinkadulla sijaitseva erikoiskarkkikauppa. Paljon harvinaisia makeisia ympäri maailmaa.',
+    category: 'candy'
+  },
+  {
+    id: 'karkkikauppa-karkkitori',
+    name: 'Karkkitori',
+    position: [60.1698, 24.9378],
+    message: 'Forumin kauppakeskuksessa oleva perinteinen irtokarkkikauppa. Laaja valikoima suomalaisia suosikkeja.',
+    category: 'candy'
+  },
+  {
+    id: 'karkkikauppa-candy-heaven',
+    name: 'Candy Heaven',
+    position: [60.1683, 24.9414],
+    message: 'Stockmannin karkkiosasto, jossa erityisesti laadukkaita suklaita ja erikoisuuksia.',
+    category: 'candy'
+  },
+  {
+    id: 'karkkikauppa-m-e-chocolatier',
+    name: 'M.E. Choclatier',
+    position: [60.1657, 24.9475],
+    message: 'Käsintehtyä suklaata ja gourmet-makeisia. Järjestää myös suklaa-tastingeja ja työpajoja.',
+    category: 'candy'
+  },
+  {
+    id: 'karkkikauppa-fazer',
+    name: 'Fazer Experience Vierailukeskus',
+    position: [60.2569852, 25.1027794],
+    message: 'Fazerin vierailukeskus Vaaralassa. Opastetut kierrokset, myymälä ja kahvila. Suklaanvalmistuksen historiaa ja maistiaisia!',
+    category: 'candy'
+  },
+  {
+    id: 'karkkikauppa-brunberg',
+    name: 'Brunberg Porvoo',
+    position: [60.3944, 25.6561],
+    message: 'Kuuluisa suomalainen suklaatehdas ja myymälä Porvoossa. Tunnettu suukoista ja tryffelimakeisista.',
+    category: 'candy'
+  },
+  {
+    id: 'karkkikauppa-american-goodies',
+    name: 'American Goodies',
+    position: [60.1698, 24.9384],
+    message: 'Amerikkalaisia karkkeja, virvoitusjuomia ja snacksejä. Paljon harvinaisia makuja!',
+    category: 'candy'
   }
 ];
