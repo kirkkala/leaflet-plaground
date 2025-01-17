@@ -1,9 +1,10 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import type { Icon } from 'leaflet';
 
-export function useMapIcon() {
-  const [icon, setIcon] = useState(null);
+export function useMapIcon(): Icon | null {
+  const [icon, setIcon] = useState<Icon | null>(null);
 
   useEffect(() => {
     // Only import and create the icon on the client side

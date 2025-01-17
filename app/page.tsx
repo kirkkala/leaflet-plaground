@@ -1,101 +1,98 @@
-import Image from "next/image";
+'use client';
+
+import { useEffect, useState } from 'react';
+import { useMapIcon } from './map/components/MapIcon';
+import dynamic from 'next/dynamic';
+
+// Dynamically import the map components with ssr disabled
+const MapContainer = dynamic(
+  () => import('react-leaflet').then((mod) => mod.MapContainer),
+  { ssr: false }
+);
+const TileLayer = dynamic(
+  () => import('react-leaflet').then((mod) => mod.TileLayer),
+  { ssr: false }
+);
+const Marker = dynamic(
+  () => import('react-leaflet').then((mod) => mod.Marker),
+  { ssr: false }
+);
+const Popup = dynamic(
+  () => import('react-leaflet').then((mod) => mod.Popup),
+  { ssr: false }
+);
+
+interface Location {
+  name: string;
+  position: [number, number];
+  message: string;
+}
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const icon = useMapIcon();
+  const [isClient, setIsClient] = useState(false);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  const locations: Location[] = [
+    {
+      name: 'Linnanmäki',
+      position: [60.1873, 24.9402],
+      message: 'Suomen vanhin ja suosituin huvipuisto! Täältä löytyy hurjia laitteita ja paljon hauskaa tekemistä.'
+    },
+    {
+      name: 'Korkeasaari Zoo',
+      position: [60.1750, 24.9889],
+      message: 'Tutustu villieläimiin! Korkeasaaressa voit nähdä yli 150 eläinlajia kaikista maanosista.'
+    },
+    {
+      name: 'SEA LIFE Helsinki',
+      position: [60.1630, 24.9555],
+      message: 'Sukella vedenalaiseen maailmaan! Täällä näet haita, meritähtiä ja paljon muita mereneläviä.'
+    },
+    {
+      name: 'Helsingin lasten kaupunki',
+      position: [60.1718, 24.9521],
+      message: 'Kaupunginmuseossa sijaitseva Lasten kaupunki on hauska paikka oppia Helsingin historiasta leikkien!'
+    },
+    {
+      name: 'Suomenlinna',
+      position: [60.1454, 24.9881],
+      message: 'Historiallinen merilinnoitus jossa riittää tutkittavaa: tunneleita, tykkejä ja museoita. Kesäisin piknik-retkien suosikki!'
+    }
+  ];
+
+  const centerPosition: [number, number] = [60.1699, 24.9384];
+
+  return (
+    <div className="min-h-screen">
+      <style jsx global>{`
+        @import 'leaflet/dist/leaflet.css';
+      `}</style>
+
+      {isClient && icon ? (
+        <MapContainer center={centerPosition} zoom={12} style={{ height: '100vh', width: '100%' }}>
+          <TileLayer
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            attribution="&copy; <a href='http://osm.org/copyright'>OpenStreetMap</a> contributors"
           />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+          {locations.map((location) => (
+            <Marker
+              key={location.name}
+              position={location.position}
+              icon={icon}
+            >
+              <Popup>
+                <strong>{location.name}</strong>
+                <br />
+                {location.message}
+              </Popup>
+            </Marker>
+          ))}
+        </MapContainer>
+      ) : null}
     </div>
   );
 }
